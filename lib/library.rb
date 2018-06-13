@@ -1,4 +1,4 @@
-require "library/version"
+require 'library/version'
 
 module Library
   # Your code goes here...
