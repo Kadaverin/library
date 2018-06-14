@@ -8,7 +8,7 @@ require 'library/helpers/fake_data_for_lib'
 require 'yaml'
 
 module Library
-  # //
+  # simple book library simulation
   class BookLibrary
     attr_reader :authors, :books, :readers, :orders
 
@@ -37,6 +37,7 @@ module Library
       @orders << Order.new(book, reader, date)
     end
 
+    # Returns array of two-elements arrays: [[entity1 freq1], [entity2,freq2]..]
     def form_elem_to_frequency_arr_for(entity, top_amount = orders.length)
       el_to_freq_hash = orders.each_with_object(Hash.new(0)) do |order, h|
         h[order.send(entity)] += 1
@@ -66,9 +67,10 @@ module Library
 end
 
 lib = Library::BookLibrary.load_from_file
-fake_data_for_lib(lib)
+# lib = Library::BookLibrary.new
+# fake_data_for_lib(lib)
 
-puts "Top reader: #{lib.top_reader}"
+puts "Top reader: #{lib.top_reader.name}"
 boks_with_order_amount = lib.top_three_books_with_order_amount
 
 puts 'Top books:'
